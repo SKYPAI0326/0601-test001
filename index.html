@@ -1,376 +1,321 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-TW">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>商務會議議程計時器</title>
-    <style>
-        :root {
-            --primary-bg: #fdfcfb;
-            --card-bg: #ffffff;
-            --text-main: #34495e;
-            --text-light: #95a5a6;
-            --accent-blue: #6d82a3; /* 接近圖片中的按鈕顏色 */
-            --accent-red: #e74c3c;
-            --border-color: #e0e0e0;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>課程報價試算器 - 黑金奢華版</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #0a0a0a;              /* 深邃曜石黑 */
+      --primary-color: #d4af37;         /* 經典香檳金 */
+      --primary-hover: #f3cf65;        /* 亮金 */
+      --text-dark: #f5f5f5;            /* 溫和白 */
+      --text-muted: #a09e9a;           /* 質感霧灰 */
+      --border-color: #2c2a25;         /* 暗金調深色邊框 */
+      --card-bg: #141414;              /* 碳黑卡片背景 */
+      --warning-color: #ff6b6b;        /* 警示紅 */
+      --warning-bg: #2d1919;           /* 暗紅警示背景 */
+      --gold-glow: rgba(212, 175, 55, 0.2); /* 金色光暈 */
+    }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--primary-bg);
-            color: var(--text-main);
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-dark);
+      font-family: 'Noto Sans TC', sans-serif;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 800px;
-        }
+    .container {
+      background-color: var(--card-bg);
+      width: 100%;
+      max-width: 500px;
+      border-radius: 20px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.9), 0 0 20px rgba(212, 175, 55, 0.08);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      transition: transform 0.3s ease;
+    }
 
-        header {
-            margin-bottom: 40px;
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 20px;
-        }
+    .header {
+      background: linear-gradient(135deg, #1c1c1c, #0a0a0a);
+      color: var(--primary-color);
+      padding: 28px 24px;
+      text-align: center;
+      border-bottom: 1px solid var(--border-color);
+    }
 
-        h1 { font-size: 1.5rem; font-weight: 600; color: #444; margin-bottom: 8px; }
-        .subtitle { color: var(--text-light); font-size: 0.9rem; letter-spacing: 1px; }
+    .header h1 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 0 10px rgba(212, 175, 55, 0.2);
+    }
 
-        /* 設定介面 (Setup UI) */
-        .setup-section h2 {
-            font-size: 0.85rem;
-            color: var(--text-light);
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
+    .calculator-form {
+      padding: 28px 24px;
+    }
 
-        .agenda-item {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 12px;
-            align-items: center;
-            animation: fadeIn 0.3s ease;
-        }
+    .input-group {
+      margin-bottom: 22px;
+    }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .input-group label {
+      display: block;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: var(--text-dark);
+      font-size: 0.95rem;
+      letter-spacing: 0.5px;
+    }
 
-        input[type="text"] {
-            flex: 1;
-            padding: 12px 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            font-size: 1rem;
-        }
+    .input-wrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
 
-        input[type="number"] {
-            width: 80px;
-            padding: 12px 5px;
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            text-align: center;
-            font-size: 1rem;
-        }
+    .input-wrapper input {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 1.05rem;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      background-color: #1e1e1e;
+      font-family: inherit;
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+    }
 
-        .btn-remove {
-            background: none;
-            border: 1px solid var(--border-color);
-            color: var(--text-light);
-            width: 40px;
-            height: 40px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1.2rem;
-        }
+    .input-wrapper input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      background-color: #242424;
+      box-shadow: 0 0 0 3px var(--gold-glow);
+    }
 
-        .btn-remove:hover { border-color: var(--accent-red); color: var(--accent-red); }
+    .input-wrapper .suffix {
+      position: absolute;
+      right: 16px;
+      color: var(--primary-color);
+      opacity: 0.85;
+      font-size: 0.9rem;
+      pointer-events: none;
+      font-weight: 500;
+    }
 
-        .btn-add {
-            background: none;
-            border: 1px dashed var(--border-color);
-            color: var(--text-light);
-            padding: 12px;
-            width: 100%;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: all 0.2s;
-        }
+    .input-wrapper input {
+      padding-right: 54px; /* 為右側單位預留空間 */
+    }
 
-        .btn-add:hover { background: #f9f9f9; border-color: var(--accent-blue); color: var(--accent-blue); }
+    .warning-banner {
+      display: none;
+      background-color: var(--warning-bg);
+      color: var(--warning-color);
+      border: 1px solid rgba(255, 107, 107, 0.25);
+      padding: 12px 16px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      align-items: center;
+      gap: 10px;
+      animation: fadeIn 0.3s ease;
+    }
 
-        .btn-main {
-            background-color: var(--accent-blue);
-            color: white;
-            border: none;
-            padding: 18px;
-            width: 100%;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: 500;
-            cursor: pointer;
-            margin-top: 40px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        .btn-main:hover { filter: brightness(1.1); }
+    .warning-banner.active {
+      display: flex;
+    }
 
-        /* 執行介面 (Timer UI) */
-        #timerInterface { display: none; text-align: center; }
+    .results-section {
+      background-color: #0e0e0e;
+      border-top: 1px solid var(--border-color);
+      padding: 28px 24px;
+    }
 
-        .current-task-label { font-size: 1.5rem; color: var(--text-light); margin-bottom: 10px; }
-        .current-task-name { font-size: 3rem; font-weight: 700; margin-bottom: 20px; }
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+    }
 
-        .big-timer {
-            font-size: 12rem;
-            font-weight: 800;
-            font-variant-numeric: tabular-nums;
-            margin: 20px 0;
-            line-height: 1;
-        }
+    .result-row .value-normal {
+      color: #e0e0e0;
+      font-weight: 500;
+    }
 
-        .warning { color: var(--accent-red); }
+    .result-row.total-row {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 2px dashed var(--border-color);
+      color: var(--text-dark);
+    }
 
-        .progress-list {
-            margin-top: 40px;
-            text-align: left;
-            background: #f9f9f9;
-            padding: 20px;
-            border-radius: 12px;
-        }
+    .result-row.total-row .label {
+      font-weight: 700;
+      font-size: 1.15rem;
+    }
 
-        .progress-row {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 0;
-            border-bottom: 1px solid #eee;
-            color: var(--text-light);
-        }
+    .result-row.total-row .value {
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+      letter-spacing: 0.5px;
+    }
 
-        .progress-row.active { color: var(--accent-blue); font-weight: bold; }
-        .progress-row.done { text-decoration: line-through; opacity: 0.5; }
-
-        .timer-controls {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .btn-control {
-            flex: 1;
-            padding: 15px;
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            background: white;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .btn-control:hover { background: #f5f5f5; }
-
-        .hidden { display: none !important; }
-    </style>
+    /* 隱藏 Chrome/Safari/Edge/Firefox 的數值箭頭 */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <div class="subtitle">PRAC 1-3 • INTERACTIVE TOOL</div>
-        <h1>會議議程計時器</h1>
-    </header>
-
-    <!-- 設定模式 -->
-    <div id="setupInterface" class="setup-section">
-        <h2>STEP 1 • 設定今天的議程</h2>
-        <div id="agendaList">
-            <!-- 預設項目 -->
-            <div class="agenda-item">
-                <input type="text" value="開場與簡報目標" placeholder="議程名稱">
-                <input type="number" value="5" min="1">
-                <button class="btn-remove" onclick="removeRow(this)">×</button>
-            </div>
-            <div class="agenda-item">
-                <input type="text" value="業務進度報告" placeholder="議程名稱">
-                <input type="number" value="10" min="1">
-                <button class="btn-remove" onclick="removeRow(this)">×</button>
-            </div>
-            <div class="agenda-item">
-                <input type="text" value="問題討論" placeholder="議程名稱">
-                <input type="number" value="15" min="1">
-                <button class="btn-remove" onclick="removeRow(this)">×</button>
-            </div>
-            <div class="agenda-item">
-                <input type="text" value="行動項目確認" placeholder="議程名稱">
-                <input type="number" value="5" min="1">
-                <button class="btn-remove" onclick="removeRow(this)">×</button>
-            </div>
-        </div>
-        <button class="btn-add" onclick="addRow()">+ 新增議程項目</button>
-        <button class="btn-main" onclick="startMeeting()">建立計時器並開始</button>
+  <div class="container">
+    <div class="header">
+      <h1>課程報價試算器</h1>
     </div>
 
-    <!-- 執行模式 -->
-    <div id="timerInterface">
-        <div class="current-task-label">目前議程</div>
-        <div id="activeTaskName" class="current-task-name">載入中...</div>
-        
-        <div id="display" class="big-timer">00:00</div>
+    <div class="calculator-form">
+      <!-- 驗證提示 -->
+      <div id="warningBanner" class="warning-banner">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <span>折扣率過高，請確認</span>
+      </div>
 
-        <div class="timer-controls">
-            <button id="pauseBtn" class="btn-control" onclick="togglePause()">暫停</button>
-            <button class="btn-control" onclick="nextTask()">下一個項目</button>
-            <button class="btn-control" onclick="resetAll()">重新設定</button>
+      <!-- 輸入欄位 -->
+      <div class="input-group">
+        <label for="students">學員人數</label>
+        <div class="input-wrapper">
+          <input type="number" id="students" min="0" placeholder="0" autocomplete="off">
+          <span class="suffix">人</span>
         </div>
+      </div>
 
-        <div id="miniAgenda" class="progress-list">
-            <!-- 動態填入剩餘清單 -->
+      <div class="input-group">
+        <label for="hours">上課時數</label>
+        <div class="input-wrapper">
+          <input type="number" id="hours" min="0" step="any" placeholder="0" autocomplete="off">
+          <span class="suffix">小時</span>
         </div>
+      </div>
+
+      <div class="input-group">
+        <label for="rate">每小時單價 (NT$)</label>
+        <div class="input-wrapper">
+          <input type="number" id="rate" min="0" placeholder="0" autocomplete="off">
+          <span class="suffix">元/時</span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label for="discount">折扣率 (%)</label>
+        <div class="input-wrapper">
+          <input type="number" id="discount" min="0" max="100" step="any" placeholder="0" autocomplete="off">
+          <span class="suffix">%</span>
+        </div>
+      </div>
     </div>
-</div>
 
-<script>
-    let agendas = [];
-    let currentIndex = 0;
-    let timeLeft = 0;
-    let timerId = null;
-    let isPaused = false;
-    let audioCtx = null;
+    <div class="results-section">
+      <div class="result-row">
+        <span>小計</span>
+        <span id="subtotalDisplay" class="value-normal">NT$ 0</span>
+      </div>
+      <div class="result-row">
+        <span>折扣金額</span>
+        <span id="discountDisplay" class="value-normal">NT$ 0</span>
+      </div>
+      <div class="result-row total-row">
+        <span class="label">總計</span>
+        <span class="value" id="totalDisplay">NT$ 0</span>
+      </div>
+    </div>
+  </div>
 
-    function addRow() {
-        const container = document.getElementById('agendaList');
-        const div = document.createElement('div');
-        div.className = 'agenda-item';
-        div.innerHTML = `
-            <input type="text" placeholder="議程名稱">
-            <input type="number" value="10" min="1">
-            <button class="btn-remove" onclick="removeRow(this)">×</button>
-        `;
-        container.appendChild(div);
-    }
+  <script>
+    (function () {
+      // 獲取 DOM 節點
+      const inputs = {
+        students: document.getElementById('students'),
+        hours: document.getElementById('hours'),
+        rate: document.getElementById('rate'),
+        discount: document.getElementById('discount')
+      };
 
-    function removeRow(btn) {
-        const rows = document.querySelectorAll('.agenda-item');
-        if (rows.length > 1) {
-            btn.parentElement.remove();
-        }
-    }
+      const displays = {
+        subtotal: document.getElementById('subtotalDisplay'),
+        discount: document.getElementById('discountDisplay'),
+        total: document.getElementById('totalDisplay'),
+        warning: document.getElementById('warningBanner')
+      };
 
-    function playSound() {
-        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-        const osc = audioCtx.createOscillator();
-        const gain = audioCtx.createGain();
-        osc.connect(gain);
-        gain.connect(audioCtx.destination);
-        osc.type = 'sine';
-        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime); // D5
-        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.1);
-        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.8);
-        osc.start();
-        osc.stop(audioCtx.currentTime + 0.8);
-    }
+      // 核心試算功能
+      function calculate() {
+        // 安全獲取數值（空字串或無效值自動降級為 0）
+        const students = Math.max(0, parseInt(inputs.students.value, 10)) || 0;
+        const hours = Math.max(0, parseFloat(inputs.hours.value)) || 0;
+        const rate = Math.max(0, parseInt(inputs.rate.value, 10)) || 0;
+        const discountRate = Math.max(0, parseFloat(inputs.discount.value)) || 0;
 
-    function startMeeting() {
-        const rows = document.querySelectorAll('.agenda-item');
-        agendas = [];
-        rows.forEach(row => {
-            const name = row.querySelector('input[type="text"]').value || "未命名項目";
-            const mins = parseInt(row.querySelector('input[type="number"]').value) || 1;
-            agendas.push({ name, mins, seconds: mins * 60 });
-        });
+        // 金額公式運算
+        const subtotal = students * hours * rate;
+        const discountAmount = subtotal * (discountRate / 100);
+        const total = Math.max(0, subtotal - discountAmount);
 
-        if (agendas.length === 0) return;
-
-        document.getElementById('setupInterface').style.display = 'none';
-        document.getElementById('timerInterface').style.display = 'block';
-        
-        currentIndex = 0;
-        loadTask(0);
-    }
-
-    function loadTask(index) {
-        if (index >= agendas.length) {
-            finishMeeting();
-            return;
-        }
-        currentIndex = index;
-        timeLeft = agendas[index].seconds;
-        document.getElementById('activeTaskName').textContent = agendas[index].name;
-        updateMiniAgenda();
-        renderTime();
-        
-        if (timerId) clearInterval(timerId);
-        isPaused = false;
-        document.getElementById('pauseBtn').textContent = "暫停";
-        startCountdown();
-    }
-
-    function startCountdown() {
-        timerId = setInterval(() => {
-            if (!isPaused) {
-                timeLeft--;
-                renderTime();
-                if (timeLeft <= 0) {
-                    clearInterval(timerId);
-                    playSound();
-                    setTimeout(() => nextTask(), 1500);
-                }
-            }
-        }, 1000);
-    }
-
-    function renderTime() {
-        const m = Math.floor(timeLeft / 60);
-        const s = timeLeft % 60;
-        const display = document.getElementById('display');
-        display.textContent = `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
-        
-        // 剩餘 5 分鐘或低於 20% 時間時變紅
-        if (timeLeft <= 300) {
-            display.classList.add('warning');
+        // 驗證折扣率是否超過 30%
+        if (discountRate > 30) {
+          displays.warning.classList.add('active');
         } else {
-            display.classList.remove('warning');
+          displays.warning.classList.remove('active');
         }
-    }
 
-    function updateMiniAgenda() {
-        const container = document.getElementById('miniAgenda');
-        container.innerHTML = '<h3>後續議程</h3>';
-        agendas.forEach((task, idx) => {
-            const row = document.createElement('div');
-            row.className = `progress-row ${idx === currentIndex ? 'active' : ''} ${idx < currentIndex ? 'done' : ''}`;
-            row.innerHTML = `<span>${task.name}</span><span>${task.mins}m</span>`;
-            container.appendChild(row);
-        });
-    }
+        // 格式化輸出金額 (包含千分位)
+        displays.subtotal.textContent = `NT$ ${Math.round(subtotal).toLocaleString('zh-TW')}`;
+        displays.discount.textContent = `NT$ ${Math.round(discountAmount).toLocaleString('zh-TW')}`;
+        displays.total.textContent = `NT$ ${Math.round(total).toLocaleString('zh-TW')}`;
+      }
 
-    function togglePause() {
-        isPaused = !isPaused;
-        document.getElementById('pauseBtn').textContent = isPaused ? "繼續" : "暫停";
-    }
+      // 監聽所有輸入框變更
+      Object.values(inputs).forEach(input => {
+        input.addEventListener('input', calculate);
+      });
 
-    function nextTask() {
-        clearInterval(timerId);
-        loadTask(currentIndex + 1);
-    }
-
-    function finishMeeting() {
-        document.getElementById('activeTaskName').textContent = "會議結束";
-        document.getElementById('display').textContent = "DONE";
-        document.getElementById('display').classList.remove('warning');
-        clearInterval(timerId);
-    }
-
-    function resetAll() {
-        clearInterval(timerId);
-        document.getElementById('setupInterface').style.display = 'block';
-        document.getElementById('timerInterface').style.display = 'none';
-    }
-</script>
-
+      // 初始化頁面數值
+      calculate();
+    })();
+  </script>
 </body>
 </html>
