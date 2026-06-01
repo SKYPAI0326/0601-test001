@@ -141,28 +141,55 @@
         </div>
     </section>
 
-    <!-- 合作商標牆 (Trusted By) - 完美復刻原圖低調高級感 -->
+    <!-- 專業證照認證入口 (Verified Credentials Gateway) - 完美取代 Trusted By 區塊 -->
     <section class="max-w-7xl mx-auto w-full px-6 py-12">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
-            <h3 class="text-xs font-mono uppercase tracking-widest text-editorial-muted">TRUSTED BY // 曾被這些事物所信賴</h3>
-            <p class="text-xs font-mono text-editorial-muted">【待補充】 1,000+ 個曾被我放鳥或一起擺爛的專案</p>
+            <h3 class="text-xs font-mono uppercase tracking-widest text-editorial-muted">OFFICIAL CREDENTIALS // 專業技能認證</h3>
+            <p class="text-xs font-mono text-editorial-muted">Verified by Certiport & Microsoft Registry</p>
         </div>
         
-        <!-- 商標網格 -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-editorial-border border border-editorial-border rounded-xl overflow-hidden">
-            <div class="bg-editorial-bg p-6 flex items-center justify-center gap-2 grayscale opacity-60 hover:opacity-100 transition">
-                <span class="font-bold text-sm tracking-widest font-serif">BedTime Blox</span>
+        <!-- 卡片式連結入口，具備優雅的 3D 浮出與光影過渡 -->
+        <a href="https://skypai0326.github.io/0601-test001/credentials.html" class="block group relative bg-editorial-card border thin-border rounded-2xl p-8 md:p-10 hover:-translate-y-1 hover:scale-[1.005] hover:shadow-[0_20px_40px_rgba(28,26,23,0.12)] transition-all duration-300 ease-out overflow-hidden">
+            <!-- 藝術裝飾背景同心圓線 -->
+            <div class="absolute -right-20 -bottom-20 w-80 h-80 rounded-full border border-editorial-border/40 pointer-events-none"></div>
+            <div class="absolute -right-10 -bottom-10 w-60 h-60 rounded-full border border-editorial-border/60 pointer-events-none"></div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                <!-- 左側：徽章與主要說明 (8/12) -->
+                <div class="lg:col-span-8 flex flex-col sm:flex-row gap-6 items-start sm:items-center">
+                    <!-- 專業防偽徽章 SVG -->
+                    <div class="w-16 h-16 rounded-2xl bg-editorial-bg flex items-center justify-center shrink-0 border thin-border text-editorial-text shadow-sm group-hover:scale-105 transition-transform duration-300">
+                        <svg class="w-10 h-10" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 01-1.043 3.296 3.745 3.745 0 01-3.296 1.043A3.745 3.745 0 0112 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 01-3.296-1.043 3.745 3.745 0 01-1.043-3.296A3.745 3.745 0 013 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 011.043-3.296 3.746 3.746 0 013.296-1.043A3.746 3.746 0 0112 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 013.296 1.043 3.746 3.746 0 011.043 3.296A3.745 3.745 0 0121 12z" />
+                        </svg>
+                    </div>
+                    
+                    <div>
+                        <span class="text-[9px] font-mono bg-editorial-text text-editorial-bg px-2.5 py-0.5 rounded-full uppercase tracking-widest mb-2.5 inline-block">SECURE VERIFIED</span>
+                        <h3 class="serif-title text-2xl md:text-3xl font-bold tracking-tight text-editorial-text leading-tight">
+                            Microsoft Office Specialist <br class="hidden sm:inline">
+                            <span class="italic font-normal">MOS 專業級原廠證照認證中心</span>
+                        </h3>
+                        <p class="text-xs text-editorial-muted font-sans mt-2.5 max-w-xl leading-relaxed">
+                            本專案已對接微軟官方衡量之正式技能要點。點擊進入可線上核查與追蹤 Word 專業排版、Excel 資料邏輯計算及 PowerPoint 簡報大師級之官方防偽數位證書。
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- 右側：數據統計與行動引導 (4/12) -->
+                <div class="lg:col-span-4 flex flex-col sm:flex-row lg:flex-col justify-between items-start sm:items-center lg:items-end gap-5 border-t lg:border-t-0 lg:border-l thin-border pt-6 lg:pt-0 lg:pl-8">
+                    <div class="text-left lg:text-right">
+                        <span class="text-[9px] font-mono text-editorial-muted block uppercase tracking-wider">CERTIFICATION STATUS</span>
+                        <span class="text-xl font-serif font-bold text-editorial-text">3 Verified Badges</span>
+                    </div>
+                    
+                    <!-- 行動指引按鈕 -->
+                    <span class="inline-flex items-center gap-3 bg-editorial-text text-editorial-bg text-xs font-semibold tracking-wider py-3.5 px-6 rounded-full group-hover:bg-neutral-800 transition-all duration-300">
+                        驗證官方證照 ➔
+                    </span>
+                </div>
             </div>
-            <div class="bg-editorial-bg p-6 flex items-center justify-center gap-2 grayscale opacity-60 hover:opacity-100 transition">
-                <span class="font-bold text-sm tracking-widest font-serif">Supa Carb</span>
-            </div>
-            <div class="bg-editorial-bg p-6 flex items-center justify-center gap-2 grayscale opacity-60 hover:opacity-100 transition">
-                <span class="font-bold text-sm tracking-widest font-serif">Hype Sleep</span>
-            </div>
-            <div class="bg-editorial-bg p-6 flex items-center justify-center gap-2 grayscale opacity-60 hover:opacity-100 transition">
-                <span class="font-bold text-sm tracking-widest font-serif">Lazy Devs</span>
-            </div>
-        </div>
+        </a>
     </section>
 
     <!-- 關於我大區塊 (敘事排版) -->
